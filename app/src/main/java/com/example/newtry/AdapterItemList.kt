@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.newtry.models.ProductListResponseItem
 import com.squareup.picasso.Picasso
 
-class AdapterItemList( private val arrayList: ArrayList<ProductListResponseItem>) : RecyclerView.Adapter<AdapterItemList.hello>(){
+class AdapterItemList(private val arrayList: ArrayList<ProductListResponseItem>,private val listener : onItemClick) : RecyclerView.Adapter<AdapterItemList.hello>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterItemList.hello {
@@ -26,6 +26,14 @@ class AdapterItemList( private val arrayList: ArrayList<ProductListResponseItem>
         Log.d("AdapterItemList","onBindViewHolder")
        holder.Txtview.text = arrayList[position].category
         Picasso.get().load(arrayList[position].image).into(holder.Imgview)
+        holder.Txtview.setOnClickListener{
+            listener.onClickOnProduct(position, arrayList[position])
+        }
+
+    }
+
+    interface onItemClick{
+        fun onClickOnProduct(position: Int, productListResponseItem: ProductListResponseItem)
     }
 
 

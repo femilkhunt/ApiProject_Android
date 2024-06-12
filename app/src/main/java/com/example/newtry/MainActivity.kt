@@ -25,7 +25,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun initAdapter() {
-        productListAdapter = AdapterItemList(arrayList)
+        productListAdapter = AdapterItemList(arrayList,object : AdapterItemList.onItemClick{
+            override fun onClickOnProduct(
+                position: Int,
+                productListResponseItem: ProductListResponseItem
+            ) {
+
+            }
+
+        })
         RvProductList.layoutManager = LinearLayoutManager(this)
         RvProductList.adapter = productListAdapter
     }
